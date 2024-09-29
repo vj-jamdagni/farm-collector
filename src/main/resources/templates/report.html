@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Season Report</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+<h1>Season Report for <span th:text="${season}"></span></h1>
+<div th:if="${reports.isEmpty()}">
+    <p>No reports available for this season.</p>
+</div>
+<div th:unless="${reports.isEmpty()}">
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Farm Name</th>
+            <th>Crop Type</th>
+            <th>Expected Yield (tons)</th>
+            <th>Actual Yield (tons)</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="report : ${reports}">
+            <td th:text="${report.farmName}"></td>
+            <td th:each="crop : ${report.crops}" th:text="${crop.type}"></td>
+            <td th:each="crop : ${report.crops}" th:text="${crop.expectedYield}"></td>
+            <td th:each="crop : ${report.crops}" th:text="${crop.actualYield}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
